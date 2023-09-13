@@ -67,15 +67,12 @@ namespace CodeTest
             foreach(int i in input1) {
                 // check to see if input2 contains the value
                 if(input2.Contains(i)) {
-                    // check to see if output already contains the value
-                    if(!outputList.Contains(i)) {
-                        outputList.Add(i);
-                    } // if output does not contain value
+                    outputList.Add(i);
                 } // if input2 contains the value
             } // iterate over input1
-            // change outputList to array type for return        
-            int[] output = outputList.ToArray();
-            return output;
+            // change outputList to array type for return
+            // added distinct method to remove duplicates        
+            return outputList.Distinct().ToArray();
         }
 
 
@@ -87,9 +84,24 @@ namespace CodeTest
         /// <returns>an array of integers</returns>
         public static int[] GetDiff(int[] input1, int[] input2)
         {
-            int[] output = new int[0];
-
-            return output;
+            int[] matches = GetMatches(input1, input2);
+            List<int> outputList = new();
+            // add any elements of inputs into the output list that are not in matches
+            // iterate over input1
+            foreach(int i in input1) {
+                if(!matches.Contains(i)) {
+                    outputList.Add(i);
+                }
+            } // iterate over input1
+            // iterate over input2
+            foreach(int i in input2) {
+                if(!matches.Contains(i)) {
+                    outputList.Add(i);
+                }
+            } // iterate over input2
+            // change outputList to array type for return
+            // added distinct method to remove duplicates        
+            return outputList.Distinct().ToArray();
         }
     }
 }
