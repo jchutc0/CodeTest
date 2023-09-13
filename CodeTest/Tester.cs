@@ -15,7 +15,21 @@ namespace CodeTest
         /// <returns>bool</returns>
         public static bool IsPalindrome(string input)
         {
-            return false;
+            // create indexes to the first and last elements of the string
+            int startIndex = 0;
+            int endIndex = input.Length - 1;
+            // check that the characters at the start and end of the string are the same
+            // if they are not, return false
+            while(endIndex > startIndex) {
+                if(input[startIndex] != input[endIndex]) {
+                    // if the elements don't match, the string is not a palindrome
+                    return false;
+                } // if !=
+                startIndex += 1;
+                endIndex -= 1;
+            } // iterate over string
+            // if we get here, the two indexes met in the middle with no missed matches
+            return true;
         }
 
         /// <summary>
@@ -25,11 +39,20 @@ namespace CodeTest
         /// <returns>Dictionary with each character from the string as the key and the count of each charter as the value</returns>
         public static Dictionary<char, int> CharacterCount(string inpput)
         {
+            // set up output dictionary to return
             Dictionary<char, int> output = new Dictionary<char, int>();
-
+            // iterate through string
+            foreach(char c in inpput) {
+                if(output.ContainsKey(c)) {
+                    // if the dictionary contains a count for the character, increment it
+                    output[c] += 1;
+                } else {
+                    // if the dictionary has no count for the character, make it 1
+                    output[c] = 1;
+                }
+            } // iterate over string
             return output;
         }
-
 
         /// <summary>
         /// Function that accepts two arrays of integers and returns an array of integers that are in both arrays.
@@ -39,8 +62,19 @@ namespace CodeTest
         /// <returns>an array of integers</returns>
         public static int[] GetMatches(int[] input1, int[] input2)
         {
-            int[] output =  new int[0];            
-
+            List<int> outputList = new();   
+            // iterate over input1
+            foreach(int i in input1) {
+                // check to see if input2 contains the value
+                if(input2.Contains(i)) {
+                    // check to see if output already contains the value
+                    if(!outputList.Contains(i)) {
+                        outputList.Add(i);
+                    } // if output does not contain value
+                } // if input2 contains the value
+            } // iterate over input1
+            // change outputList to array type for return        
+            int[] output = outputList.ToArray();
             return output;
         }
 
